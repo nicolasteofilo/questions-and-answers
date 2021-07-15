@@ -5,10 +5,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
     <h1>questions_and_answers</h1>
     <hr>
     <h3>Lista de perguntas</h3>
+
+    <p>Nome: <%= nome %></p> <!--Com o = eu coloco variaveis--> 
+    <p>Linguagem Favorita: <%= lang %></p>
+    <p>Empresa: <%= empresa %></p>
+
+    <% if(msg == true) { %>
+        <h3>Isso é uma mensagem de erro</h3> 
+    <% } else {  %>
+        <h3>Nenhum erro</h3>
+    <% }  %> 
+
+         <% produtos.forEach(function(produto) { %>
+             <%= produto.nome %>
+             <%= produto.preco %>
+             <br>
+             <br> 
+         <% });  %>  <!-- for each significada que para cada elemento de um array ele vai fazer algo  -->
+
 </body>
 </html>

@@ -5,8 +5,12 @@ const app = express();
 app.set("view engine", "ejs"); // usar o ejs como view engine
 app.use(express.static('public'))
 
+// URL
+app.use(express.urlencoded({extended:false}))
+app.use(express.json());
+
 // ROUTES
-app.get("/", (req, res) => {
+app.get("/", (req, res) => {  
   res.render("index");
 });
 
@@ -15,9 +19,10 @@ app.get("/perguntar", (req, res) => {
 })
 
 app.post("/salvarpergunta", (req, res) => {
-  res.send("Formulário recebido")
+  var titulo = req.body.titulo
+  var descrisao = req.body.descrisao
+  res.send(`Formulário recebido! Título:${titulo}, Descrisão:${descrisao}`)
 })
-
 
 // RUNING APPLICATION
 

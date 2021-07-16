@@ -1,0 +1,29 @@
+* {
+    font-family: Roboto, sans-serif;
+}
+.title {
+    font-weight: 800;
+}
+a {
+    text-decoration: none;
+}
+body {
+    background-color: #eceff1;
+}
+
+.navbar a {
+    color: white;
+}
+
+.home-link {
+    margin-left: 0.9rem;
+    font-weight: 500;
+}
+
+.home-link:hover {
+    color: #44f34c;
+}
+
+.form-question {
+    margin-top: 5vh;
+}

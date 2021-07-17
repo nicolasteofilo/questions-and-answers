@@ -1,7 +1,25 @@
 <%- include ("partials/header.ejs") %>
 <body>
     <%- include ("partials/navbar.ejs") %>
-    <h1>Estilo Bootsatrp</h1>
+    
+    <div class="container">
+        
+        <h3 class="mt-4">Perguntar</h3>
+        <hr>
+        <a href="/perguntar"class="btn btn-outline-secondary">Perguntar</a>
+        <div class="mb-4"></div>
+        <div>
+            <% perguntas.forEach(pergunta => { %>
+                <div class="card">
+                    <div class="card-body">
+                        <p class=""><%= pergunta.titulo %></p>
+                        <a href="/pergunta/<%= pergunta.id %> " class="btn btn-outline-primary">Responder</a>
+                    </div>
+                </div>
+                <br>
+            <% })%>
+        </div>
+    </div>
 </body>
 <%- include ("partials/footer.ejs") %>
 

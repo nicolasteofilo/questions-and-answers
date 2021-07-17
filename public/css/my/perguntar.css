@@ -27,3 +27,7 @@ body {
 .form-question {
     margin-top: 5vh;
 }
+
+.question-title {
+    padding-top: 4px;
+}

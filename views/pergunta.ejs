@@ -10,6 +10,28 @@
         </div>
         <hr>
         
+        <form action="/responder" method="POST">
+            <h3 class="mt-4">Responda</h3>
+            <textarea name="corpo" class="form-control" placeholder="Digite sua resposta"></textarea>
+            <input type="hidden" name="pergunta" id="" value="<%= pergunta.id %> ">
+            <button type="submit" class="btn btn-dark mt-4">Enviar resposta</button>
+        </form>
+
+        <hr>
+        <h3 class="mt-4 font-weight-bold">Respostas</h3>
+        <div class="mt-4"></div>
+
+        <% respostas.forEach(resposta => { %>
+            <div class="mt-4"></div>
+            <div class="card">
+                <div class="card-body">
+                    <p><%= resposta.corpo %></p>
+                </div>
+            </div>
+        <%}); %> 
+        
+          
+
     </div>
 </body>
 <%- include ("partials/footer.ejs") %>

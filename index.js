@@ -2,9 +2,9 @@ const express = require("express");
 const app = express();
 const connection = require("./db/connection")
 const Pergunta = require("./db/models/Pergunta")
-// const Resposta = require("./db/models/Resposta")
+const Resposta = require("./db/models/Resposta")
 
-// DB
+// DB 
 connection
   .authenticate()  
   .then(() => { console.log("Connection in db success"); })
@@ -22,14 +22,14 @@ app.use(express.json());
 
 // ROUTES
 app.get("/", (req, res) => {
-	Pergunta.findAll({raw: true, order: [['id', 'DESC']]}).then(perguntas => {
-	console.log(perguntas)
-	res.render("index", {
-		perguntas: perguntas
-	});
-   }); //responsavel por procurar tudo na nossa tabela	
-       // ASC = Crescente || DESC = Decrescente
-});
+  Pergunta.findAll({ raw: true, order:[
+    ['id', 'DESC' ]
+  ] }).then(perguntas => {
+    res.render("index",{
+      perguntas: perguntas
+    })
+  })
+})
 
 app.get("/perguntar", (req, res) => {
   res.render("perguntar")
@@ -53,9 +53,18 @@ app.get("/pergunta/:id", (req, res) => {
     where: {id: id}
   }).then(pergunta => {
       if(pergunta != undefined){ // pergunta achada
-        res.render("pergunta", {
-          pergunta: pergunta // defini isso para poder mostart no front-end
+
+
+        Resposta.findAll({
+          where: {perguntaId: pergunta.id},
+          order: [['id', 'DESC']]
+        }).then(respostas => {
+          res.render("pergunta", {
+            pergunta: pergunta, // defini isso para poder mostart no front-end
+            respostas: respostas 
+          })
         })
+
       } else { // não encontrada
         res.redirect("/")
       }
@@ -63,5 +72,18 @@ app.get("/pergunta/:id", (req, res) => {
   })
 })
 
+app.post("/responder", (req, res) => {
+  var corpo = req.body.corpo
+  var perguntaId = req.body.pergunta
+  Resposta.create({
+    corpo: corpo,
+    perguntaId: perguntaId
+  }).then(() => { 
+    res.redirect(`/pergunta/${perguntaId}`)
+  })
+})
+
 // RUNING APPLICATION
-app.listen(9000)
+app.listen(9000, () => {
+  console.log("Server is runing in port 9000");
+})
